@@ -4,10 +4,8 @@ dotenv.config();
 const mongoURI = process.env.mongoURI;
 
 const connectToMongo = async() => {
-    mongoose.connect(mongoURI, {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true,
-        },).then (() => {
+    mongoose.connect(mongoURI,)
+    .then (() => {
         console.log(`Connect to BD`);
     })
 }
