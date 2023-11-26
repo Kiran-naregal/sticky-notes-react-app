@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
+const fetchUser = require('../middleware/fetchUser');
 
 // ROUTE 1: Create a new User using: POST "/api/auth/createUser". No login required
 router.post('/createUser', [
@@ -69,6 +70,18 @@ router.post('/login', [
     } catch (error) {
         console.log('Unexpected error: ', error.message)
         res.status(500).json("Some internal error occured");
+    }
+})
+
+
+// ROUTE 2: Authencte a user using POST: "/getuser". Login required
+router.post('/getuser', fetchUser, async(req, res) => {
+    try {
+        const userID = req.user.id;
+        const user = await User.findById(userID);
+        res.send(user);
+    } catch (error) {
+        
     }
 })
 
