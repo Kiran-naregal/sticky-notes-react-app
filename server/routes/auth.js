@@ -42,7 +42,7 @@ router.post('/createUser', [
 })
 
 
-// ROUTE 2: Authencte a user using POST: "/login". No login required
+// ROUTE 2: Authencte a user using POST: "/api/auth/login". No login required
 router.post('/login', [
     body('email', 'Enter a valid email').isEmail()
 ], async(req, res) => {
@@ -74,7 +74,7 @@ router.post('/login', [
 })
 
 
-// ROUTE 3: Get user detail using POST: "/getuser". Login required
+// ROUTE 3: Get user detail using POST: "/api/auth/getuser". Login required
 router.post('/getuser', fetchUser, async(req, res) => {
     try {
         const userID = req.user.id;
