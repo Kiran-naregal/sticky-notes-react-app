@@ -74,14 +74,15 @@ router.post('/login', [
 })
 
 
-// ROUTE 2: Authencte a user using POST: "/getuser". Login required
+// ROUTE 3: Get user detail using POST: "/getuser". Login required
 router.post('/getuser', fetchUser, async(req, res) => {
     try {
         const userID = req.user.id;
         const user = await User.findById(userID);
         res.send(user);
     } catch (error) {
-        
+        console.log('Unexpected error: ', error.message)
+        res.status(500).json("Some internal error occured");
     }
 })
 
