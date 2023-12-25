@@ -12,14 +12,15 @@ router.post('/createUser', [
     body('password', 'Enter password atleast 5 characters').isLength({min: 5}),
     body('email', 'Enter a valid email').isEmail()
 ],async (req, res)=>{
+    let success = false
     const result = validationResult(req);
     if(!result.isEmpty()){
-        return res.status(400).json({error: result.array()});
+        return res.status(400).json({success, error: result.array()});
     }
     try {
         let user = await User.findOne({email: req.body.email})
         if(user){
-            res.status(400).json({message:'User with specified email id exist'});
+            res.status(400).json({success, message:'User with specified email id exist'});
         }
         const salt = await bcrypt.genSalt(10);
         const securePass = await bcrypt.hash(req.body.password, salt);
@@ -34,10 +35,11 @@ router.post('/createUser', [
             }
         }
         const Token = jwt.sign(Data, process.env.JWT_SECRET);
-        res.send({Token});
+        success = true
+        res.status(200).json({success, Token, name: req.body.name});
     } catch (error) {
         console.log('Unexpected error: ', error.message)
-        res.status(500).json("Some internal error occured");
+        res.status(500).json({success, message: "Some internal error occured"});
     }
 })
 
@@ -46,19 +48,20 @@ router.post('/createUser', [
 router.post('/login', [
     body('email', 'Enter a valid email').isEmail()
 ], async(req, res) => {
+    let success = false
     const result = validationResult(req);
     if(!result){
-        return res.status(400).json({error: result.array()});
+        return res.status(400).json({success, error: result.array()});
     }
     let { email, password } = req.body;
     try {
         let user = await User.findOne({email: email});
         if(!user){
-            return res.status(400).json({message: "Enter correct credentials"});
+            return res.status(400).json({success, message: "Enter correct credentials"});
         }
         const compare = await bcrypt.compare(password, user.password);
         if(!compare){
-            return res.status(400).json({message: "Enter correct credentials"});
+            return res.status(400).json({success, message: "Enter correct credentials"});
         }
         const Data = {
             user:{
@@ -66,23 +69,27 @@ router.post('/login', [
             }
         }
         const Token = jwt.sign(Data, process.env.JWT_SECRET);
-        res.send({Token});
+        success = true;
+        // console.log(success)
+        res.status(200).json({success, Token, name: user.name});
     } catch (error) {
         console.log('Unexpected error: ', error.message)
-        res.status(500).json("Some internal error occured");
+        res.status(500).json({success, message: "Some internal error occured"});
     }
 })
 
 
 // ROUTE 3: Get user detail using POST: "/api/auth/getuser". Login required
 router.post('/getuser', fetchUser, async(req, res) => {
+    let success = false
     try {
         const userID = req.user.id;
         const user = await User.findById(userID);
-        res.send(user);
+        success = true
+        res.status(200).json({success, user});
     } catch (error) {
         console.log('Unexpected error: ', error.message)
-        res.status(500).json("Some internal error occured");
+        res.status(500).json({success, message: "Some internal error occured"});
     }
 })
 
