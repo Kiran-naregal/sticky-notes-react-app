@@ -50,7 +50,7 @@ router.put('/updatenote/:id', fetchUser, async(req, res)=>{
         const { title, description, tag } = req.body;
         let newNote = {};
         if(title){newNote.title = title}
-        if(description){newNote.description = title}
+        if(description){newNote.description = description}
         if(tag){newNote.tag = tag}
         let note = await Notes.findById(req.params.id);
         if(!note){
