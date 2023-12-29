@@ -22,6 +22,7 @@ function Signup() {
   }
   return (
     <div className='container'>
+      <h2 className='my-2'>Sign Up</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">User name</label>

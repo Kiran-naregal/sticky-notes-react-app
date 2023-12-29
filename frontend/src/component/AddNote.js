@@ -17,6 +17,7 @@ function AddNote() {
     const handleSubmit = (e) => {
         e.preventDefault()
         addNote(note.title, note.description, note.tag)
+        navigate('/')
     }
     const handleChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })

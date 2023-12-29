@@ -5,7 +5,8 @@ function NoteItem(props) {
     const context = useContext(noteContext)
     const {deleteNote} = context
     return (
-        <div className="card center mx-2" style={{width: "18rem"}}>
+        <div className="card center mx-4 my-2" style={{width: "18rem"}}>
+            <span className="badge bg-light text-dark" style={{display:"flex", justifyContent:"flex-end", right:0, position:"absolute"}}>{props.note.tag}</span>
             <div className="card-body">
                 <h5 className="card-title">{props.note.title}</h5>
                 <ion-icon className="sx-2" name="trash-outline" onClick={()=>{deleteNote(props.note._id)}} style={{"marginRight":"10px" ,"cursor": "pointer"}} ></ion-icon>

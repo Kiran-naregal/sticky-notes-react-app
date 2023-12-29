@@ -22,6 +22,7 @@ function Login() {
     }
     return (
         <div className='container'>
+            <h2 className='my-2'>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
