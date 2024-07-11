@@ -11,7 +11,7 @@ function NoteItem(props) {
                 <h5 className="card-title">{props.note.title}</h5>
                 <ion-icon className="sx-2" name="trash-outline" onClick={()=>{deleteNote(props.note._id)}} style={{"marginRight":"10px" ,"cursor": "pointer"}} ></ion-icon>
                 <ion-icon className="sx-2" name="create-outline" onClick={()=>{props.update(props.note)}} style={{"cursor": "pointer"}} ></ion-icon>
-                <p className="card-text">{props.note.description}</p>
+                <p className="card-text" style={{textAlign: "justify"}}>{props.note.description}</p>
             </div>
         </div>
     )

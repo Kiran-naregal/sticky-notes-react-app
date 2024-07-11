@@ -79,11 +79,13 @@ function Home() {
         </Modal>
         <div className="container row">
         <h2 className="me-auto my-2">Your notes</h2>
+        <section className="d-flex flex-wrap justify-content-evenly">
         {notes.map((note) => {
           return (
             <NoteItem key={note._id} update={updateNote} note={note} />
           )
         })}
+        </section>
         </div>
       </div>
     </>

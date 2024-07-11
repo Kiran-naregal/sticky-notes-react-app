@@ -21,9 +21,9 @@ function Login() {
         setCredentials({...credentials, [e.target.name]:e.target.value})
     }
     return (
-        <div className='container'>
-            <h2 className='my-2'>Login</h2>
-            <form onSubmit={handleSubmit}>
+        <div className='container border rounded-3 my-2' style={{maxWidth:"400px"}}>
+            <h2 className='my-2 text-center'>Login</h2>
+            <form onSubmit={handleSubmit} className='d-flex flex-column justify-content-center my-2'>
                 <div className="mb-3">
                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                     <input type="email" className="form-control" name='email' value={credentials.email} id="exampleInputEmail1" aria-describedby="emailHelp" onChange={onChange} />
@@ -32,7 +32,7 @@ function Login() {
                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                     <input type="password" className="form-control" name='password' value={credentials.password} id="exampleInputPassword1" onChange={onChange} />
                 </div>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary mx-auto">Submit</button>
             </form>
         </div>
     )

@@ -23,10 +23,10 @@ function AddNote() {
         setNote({ ...note, [e.target.name]: e.target.value })
     }
     return (
-        <div className="container">
-            <h2 className="my-2">Add a note</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3">
+        <div className="container border rounded-3 my-2" style={{maxWidth: "500px"}}>
+            <h2 className="my-2 text-center">Add a note</h2>
+            <form onSubmit={handleSubmit} className="d-flex flex-column justify-content-center my-2">
+                <div className="mb-2">
                     <label htmlFor="title" className="form-label">
                         Title
                     </label>
@@ -40,7 +40,7 @@ function AddNote() {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label htmlFor="exampleInputPassword1" className="form-label">
                         Description
                     </label>
@@ -53,7 +53,7 @@ function AddNote() {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="mb-3">
+                <div className="mb-2">
                     <label htmlFor="tag" className="form-label">
                         Tag
                     </label>
@@ -66,7 +66,7 @@ function AddNote() {
                         onChange={handleChange}
                     />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary mx-auto">
                     Add note
                 </button>
             </form>
